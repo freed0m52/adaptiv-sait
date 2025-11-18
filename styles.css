@@ -167,16 +167,19 @@ body {
     border-radius: 2px;
 }
 
-/* Hero Section */
+/* Hero Section - Мобильная версия столбиком */
 .hero {
     min-height: 100vh;
     display: flex;
+    flex-direction: column; /* Всегда столбик на мобильных */
     align-items: center;
+    justify-content: center;
     padding: var(--space-2xl) var(--space-md);
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
     color: white;
     position: relative;
     overflow: hidden;
+    text-align: center; /* Центрируем текст */
 }
 
 .hero::before {
@@ -191,10 +194,10 @@ body {
 }
 
 .hero__content {
-    flex: 1;
-    text-align: center;
+    order: 1; /* Текст первый */
     position: relative;
     z-index: 2;
+    margin-bottom: var(--space-2xl); /* Отступ перед фото */
 }
 
 .hero__title {
@@ -233,22 +236,18 @@ body {
 }
 
 .hero__image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    order: 2; /* Фото второе */
     position: relative;
     z-index: 2;
 }
 
 .hero__photo {
     width: 100%;
+    max-width: 300px; /* Уменьшаем на мобильных */
     height: auto;
     border-radius: var(--radius);
     box-shadow: var(--shadow-lg);
     border: 5px solid rgba(255, 255, 255, 0.1);
-    /* Базовый размер для мобильных */
-    max-width: 400px;
 }
 
 /* About Section - Центрируем фото на всех устройствах */
@@ -257,13 +256,13 @@ body {
     grid-template-columns: 1fr;
     gap: var(--space-xl);
     align-items: center;
-    justify-items: center; /* Центрируем все по горизонтали */
-    text-align: center; /* Центрируем текст */
+    justify-items: center;
+    text-align: center;
 }
 
 .about__image {
     display: flex;
-    justify-content: center; /* Центрируем фото по горизонтали */
+    justify-content: center;
     width: 100%;
 }
 
@@ -273,14 +272,13 @@ body {
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     border: 3px solid var(--primary-100);
-    /* Базовый размер для мобильных */
     max-width: 300px;
 }
 
 .about__text {
     font-size: 1.1rem;
     line-height: 1.8;
-    text-align: left; /* Текст оставляем слева для удобства чтения */
+    text-align: left;
 }
 
 .about__text p {
@@ -295,45 +293,6 @@ body {
     left: 0;
     color: var(--primary-color);
     font-weight: bold;
-}
-
-/* Планшеты */
-@media (min-width: 768px) {
-    .about__content {
-        grid-template-columns: 1fr; /* Оставляем одну колонку */
-        justify-items: center; /* Продолжаем центрировать */
-        text-align: center;
-    }
-    
-    .about__photo {
-        max-width: 350px; /* Увеличиваем фото на планшетах */
-    }
-    
-    .about__text {
-        text-align: left;
-        max-width: 600px; /* Ограничиваем ширину текста */
-    }
-}
-
-/* Ноутбуки */
-@media (min-width: 1024px) {
-    .about__photo {
-        max-width: 400px; /* Еще больше на ноутбуках */
-    }
-}
-
-/* Десктоп */
-@media (min-width: 1200px) {
-    .about__photo {
-        max-width: 450px; /* Максимальный размер на десктопах */
-    }
-}
-
-/* Большие экраны */
-@media (min-width: 1440px) {
-    .about__photo {
-        max-width: 500px; /* Для очень больших экранов */
-    }
 }
 
 /* Music Section */
@@ -446,7 +405,7 @@ body {
     box-shadow: 0 8px 25px rgba(13, 148, 136, 0.3);
 }
 
-/* Events Section */
+/* Events Section - Широкий квадратик с датой */
 .events {
     background: var(--primary-50);
 }
@@ -476,13 +435,15 @@ body {
 
 .event-card__date {
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Дата в строчку! */
     align-items: center;
+    justify-content: center;
     background: var(--primary-color);
     color: white;
-    padding: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
     border-radius: var(--radius);
-    min-width: 60px;
+    min-width: 100px; /* Шире чем было */
+    gap: var(--space-xs);
 }
 
 .event-card__day {
@@ -491,7 +452,8 @@ body {
 }
 
 .event-card__month {
-    font-size: 0.875rem;
+    font-size: 1rem;
+    font-weight: 600;
 }
 
 .event-card__info {
@@ -528,7 +490,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* Contact Section */
+/* Contact Section - Центрируем соцсети */
 .contact__content {
     display: grid;
     grid-template-columns: 1fr;
@@ -567,6 +529,7 @@ body {
 
 .social-links {
     display: flex;
+    justify-content: center; /* Центрируем соцсети! */
     gap: var(--space-md);
     flex-wrap: wrap;
 }
@@ -801,17 +764,31 @@ body {
 /* Tablet */
 @media (min-width: 768px) {
     .hero {
-        flex-direction: row;
+        flex-direction: row; /* На планшетах обратно в ряд */
         text-align: left;
         gap: var(--space-2xl);
     }
     
     .hero__content {
+        order: 1;
         text-align: left;
+        margin-bottom: 0;
+    }
+    
+    .hero__image {
+        order: 2;
     }
     
     .hero__photo {
-        max-width: 500px;
+        max-width: 400px;
+    }
+    
+    .about__content {
+        grid-template-columns: 1fr;
+    }
+    
+    .about__photo {
+        max-width: 350px;
     }
     
     .contact__content {
@@ -830,7 +807,7 @@ body {
     }
     
     .hero__photo {
-        max-width: 600px;
+        max-width: 500px;
     }
     
     .music__grid {
@@ -845,6 +822,10 @@ body {
         max-width: 800px;
         margin: 0 auto;
     }
+    
+    .about__photo {
+        max-width: 400px;
+    }
 }
 
 /* Desktop */
@@ -854,11 +835,15 @@ body {
     }
     
     .hero__photo {
-        max-width: 800px;
+        max-width: 600px;
     }
     
     .gallery__grid {
         grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .about__photo {
+        max-width: 450px;
     }
 }
 
@@ -869,14 +854,11 @@ body {
     }
     
     .hero__photo {
-        max-width: 1000px;
+        max-width: 700px;
     }
-}
-
-/* Extra Large Screens */
-@media (min-width: 1920px) {
-    .hero__photo {
-        max-width: 1200px;
+    
+    .about__photo {
+        max-width: 500px;
     }
 }
 
@@ -923,6 +905,12 @@ body {
         flex-direction: column;
         text-align: center;
         gap: var(--space-md);
+    }
+    
+    .event-card__date {
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
     }
     
     .footer__menu {
