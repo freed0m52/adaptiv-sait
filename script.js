@@ -67,7 +67,7 @@ function showNotification(message, type = 'info') {
         if (notification.parentNode) {
             hideNotification(notification);
         }
-    }, 5000);
+    }, 2000);
 }
 
 function hideNotification(notification) {
