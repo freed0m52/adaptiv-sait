@@ -2,4 +2,4 @@
 ## Проект
 Этот репозиторий является каркасом для будущего веб-приложения.
 ## Ссылки
-- [Публичная страница на GitHub Pages](https://github.io/freed0m52/adaptiv-sait/) 
+- [Публичная страница на GitHub Pages](https://freed0m52.github.io/adaptiv-sait/) 
